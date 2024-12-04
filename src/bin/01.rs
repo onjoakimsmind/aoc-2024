@@ -1,25 +1,10 @@
+use advent_of_code::template::bootstrap;
+
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut a: Vec<u32> = vec![];
-    let mut b: Vec<u32> = vec![];
-    let rows: Vec<&str> = input.lines().collect();
+    let (a, b) = bootstrap::parse_to_vec2(input);
 
-    for row in rows {
-        let parts: Vec<&str> = row.split_whitespace().collect();
-
-        // Ensure the line has at least two parts
-        if parts.len() >= 2 {
-            if let Ok(num_a) = parts[0].parse::<u32>() {
-                a.push(num_a);
-            }
-            if let Ok(num_b) = parts[1].parse::<u32>() {
-                b.push(num_b);
-            }
-        }
-    }
-    a.sort();
-    b.sort();
     let mut sum = 0;
 
     for i in 0..a.len() {
@@ -33,7 +18,14 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let (a, b) = bootstrap::parse_to_vec2(input);
+    let mut sum = 0;
+
+    for i in 0..a.len() {
+        sum += a[i] * b.iter().filter(|&n| *n == a[i]).count() as u32;
+    }
+
+    Some(sum)
 }
 
 #[cfg(test)]

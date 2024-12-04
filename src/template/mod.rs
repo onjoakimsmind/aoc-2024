@@ -1,9 +1,9 @@
 use std::{env, fs};
 
 pub mod aoc_cli;
+pub mod bootstrap;
 pub mod commands;
 pub mod runner;
-
 pub use day::*;
 
 mod day;
